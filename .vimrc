@@ -15,7 +15,6 @@ Plugin 'sjl/gundo.vim'
 Plugin 'ervandew/supertab'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()            " required
@@ -28,9 +27,11 @@ let g:ctrlp_map = '<c-p>'
 set tabstop=2
 set softtabstop=2
 set expandtab
+set guifont=Sauce\ Code\ Powerline\ Light:h15
 
 set number 
 set cursorline 
+set laststatus=2
 
 filetype indent on
 set wildmenu
@@ -48,13 +49,14 @@ set dir=~/tmp
 
 nnoremap <F5> :GundoToggle<CR>
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set ts=2 sw=2 et
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
 
